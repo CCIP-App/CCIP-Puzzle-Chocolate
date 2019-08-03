@@ -1,6 +1,7 @@
 import crypto from 'crypto'
+import { bingo } from '../../config/project.json'
 
-const patterns = 'cscscscscscs0cscscscscscs'
+const patterns = bingo.pattern
 
 function md5Hash (token) {
   var md5 = crypto.createHash('md5')
@@ -41,8 +42,6 @@ export default function shuffledBingo (token, booths) {
     set[key] = boothSet[key].map((_, pos, arr) => arr[validSeed[pos]])
     return set
   }, {})
-
-  console.log(shuffledBooth)
 
   return patterns.split('').map((pattern) => pattern === '0' ? { significant: 'bonus' } : shuffledBooth[pattern].pop())
 }

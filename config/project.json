@@ -1,9 +1,14 @@
 {
   "serverUrl": "https://ccip.opass.app/",
-  "sponsorUrl": "https://sitcon.org/2019/static/json/sponsor.json",
+  "": "https://sitcon.org/2019/static/json/sponsor.json",
   "title": {
     "zh": "真．實境矩陣",
     "en": "Booth Reward Activity"
   },
-  "confName": "SITCON 2019"
+  "confName": "SITCON 2019",
+  "bingo": {
+    "pattern": "cscscscscscsocscscscscscs",
+    "sealImagePath": ""
+
+  }
 }
