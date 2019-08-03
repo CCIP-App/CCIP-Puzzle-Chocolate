@@ -1,17 +1,26 @@
 <template>
   <div role="squareGrid" :style="`--edgeLength: ${edgeLength}`">
     <template v-for="(booth, index) in booths">
-      <Chip
-        :logoUri="booth.image_url"
-        :isActive="userSeals.findIndex(seal => seal.deliver === booth.slug)> -1"
-        :key="index"
-      />
+      <template v-if="showAnchor && booth.slug">
+        <a :href="`#${booth.slug}`" :key="index">
+          <Chip
+            :logoUri="booth.image_url"
+            :isActive="userSeals.findIndex(seal => seal.deliver === booth.slug)> -1"
+          />
+        </a>
+      </template>
+      <template v-else>
+        <Chip
+          :logoUri="booth.image_url"
+          :isActive="userSeals.findIndex(seal => seal.deliver === booth.slug)> -1"
+          :key="index"
+        />
+      </template>
     </template>
   </div>
 </template>
 
 <script>
-import Chip from '@/components/Chip.vue'
 export default {
   name: 'SquareGrid',
   props: {
@@ -22,14 +31,15 @@ export default {
     userSeals: {
       type: Array,
       default: () => []
+    },
+    showAnchor: {
+      type: Boolean,
+      default: false
     }
-  },
-  components: {
-    Chip
   },
   computed: {
     edgeLength () {
-      return Math.sqrt(this.booths.length, 2)
+      return Math.ceil(Math.sqrt(this.booths.length, 2))
     }
   }
 }
@@ -38,7 +48,7 @@ export default {
 <style lang="stylus">
 [role='squareGrid']
   display: grid
-  margin: 0 auto
+  margin: 1rem auto
   grid-template-rows: repeat(var(--edgeLength), auto)
   grid-template-columns: repeat(var(--edgeLength), auto)
   justify-content: center
@@ -50,12 +60,8 @@ export default {
     background: #fff
     display: flex
     align-items: center
-    width: calc((100vw / var(--edgeLength) - 5px))
-    height: calc((100vw / var(--edgeLength) - 5px))
-
-    @media screen and (min-width: 720px)
-      width: calc((100vw / var(--edgeLength) - 1rem))
-      height: calc((100vw / var(--edgeLength) - 1rem))
+    width: calc(((100vw - 2rem) / var(--edgeLength)))
+    height: calc(((100vw - 2rem) / var(--edgeLength)))
 
     img
       display: inline-block

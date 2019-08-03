@@ -75,7 +75,7 @@ export default {
   methods: {
     onSuccess (result) {
       this.result = result
-      this.$emit('OnSuccess', result)
+      this.$emit('success', result)
     },
     uploadChange () {
       var self = this
