@@ -1,0 +1,8 @@
+{
+  "has_got_points": "已獲得 {points} 點",
+  "scan_qrcode": "請掃描 QR Code",
+  "scanner": "QR Code 掃瞄器",
+  "reward" : "集章冊",
+  "bingo": "賓果冊",
+  "fragment": "碎片收集冊"
+}

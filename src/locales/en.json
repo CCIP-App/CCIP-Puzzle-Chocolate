@@ -1,0 +1,8 @@
+{
+  "has_got_points": "You got {points} points",
+  "scan_qrcode": "Scan your QR Code",
+  "scanner": "QR Code Scanner",
+  "reward" : "Reward Card",
+  "bingo": "Bingo Card",
+  "fragment": "Fragment Card"
+}
