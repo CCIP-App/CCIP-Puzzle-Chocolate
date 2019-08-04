@@ -4,15 +4,18 @@ import qs from 'qs'
 export default {
   booth: {
     getSlugByToken: async (token) => {
-      const res = await axios.get('/event/puzzle/deliverer', {
-        params: token
+      const { data: { slug } } = await axios.get('/event/puzzle/deliverer', {
+        params: {
+          token: token
+        }
       })
-      return res.data.slug
+
+      return slug
     },
     sendReward2Player: async (boothToken, playerToken) => {
-      const res = await axios.post(`/event/puzzle/deliver?token=${boothToken}`, qs.stringify({ receiver: playerToken }))
+      const { data } = await axios.post(`/event/puzzle/deliver?token=${boothToken}`, qs.stringify({ receiver: playerToken }))
 
-      return res.data.slug
+      return data
     }
   },
   player: {

@@ -2,17 +2,17 @@ import axios from 'axios'
 import { configURL } from '../../config/project.json'
 
 const defaultState = {
-  confName: '',
+  confName: 'OPass',
   title: {
-    'zh-TW': '',
-    en: ''
+    'zh-TW': '大地集章',
+    en: 'Rewards'
   },
   bingoPatterns: '',
   booths: [
     {
       isBonus: true,
       significant: 'c',
-      slug: 'OPass',
+      slug: 'opass',
       displayText: {
         'zh-TW': 'OPass 快速通關',
         en: 'OPass Check-in'
