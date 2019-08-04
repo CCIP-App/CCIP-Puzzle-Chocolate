@@ -1,12 +1,16 @@
 <template>
   <div role="header">
-    COSCUP × OPass
+    {{ confName }} × OPass
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'Header'
+  name: 'Header',
+  computed: {
+    ...mapGetters(['confName'])
+  }
 }
 </script>
 

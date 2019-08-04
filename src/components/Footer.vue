@@ -1,21 +1,19 @@
 <template>
   <div id="Footer">
     <div class="content">
-      {{confName}} | Fork on
-      <a href="https://github.com/CCIP-App/CCIP-Puzzle-Bueno/" target="_blank" alt="Source code on GitHub">GitHub</a>
+      {{confName}} × OPass | Fork on
+      <a href="https://github.com/CCIP-App/CCIP-Puzzle-Chocolate/" target="_blank" alt="Source code on GitHub">GitHub</a>
     </div>
   </div>
 </template>
 
 <script>
-import config from '../../config/project.json'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Footer',
-  data () {
-    return {
-      confName: config.confName,
-      chip: true
-    }
+  computed: {
+    ...mapGetters(['confName'])
   }
 }
 </script>
@@ -26,10 +24,6 @@ export default {
   justify-content: center
   align-items: flex-end
   flex-grow: 1
-  // background-size: cover
-  // background-repeat: no-repeat
-  // background-image: url('../assets/footer.png')
-  // background-position: center top
   .content
     padding: 2em
   .fillet-label
