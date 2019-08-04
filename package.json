@@ -1,6 +1,11 @@
 {
-  "name": "ccip-puzzle-bueno",
-  "version": "0.1.0",
+  "name": "ccip-puzzle-chocolate",
+  "version": "0.0.1",
+  "description": "Puzzle game of CCIP project (Refactoring from ccip-puzzle-bueno)",
+  "main": "index.js",
+  "repository": "https://github.com/CCIP-App/CCIP-Puzzle-Chocolate",
+  "author": "Erickson Zhuang <bingluen0224@gmail.com>",
+  "license": "GPL-3.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
