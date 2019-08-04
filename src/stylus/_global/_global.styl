@@ -4,42 +4,9 @@
 
 
 body
-  font-family: 'Abel'
+  font-family: 'Noto Sans', 'Abel'
   margin: 0
+  background: #C5C2CB
 
-.content--wrapper
-  .subPage
-    text-align: center
-    display: flex
-    flex-direction: column
-    justify-content: center
-    &.hidden
-      display: none
-
-    @media screen and (max-width: $mobile-screen-width)
-      justify-content: flex-start
-    .mobile.subpage--title
-      display: none
-      height: 75px
-      background linear-gradient(-315deg, #f9fea5, #20e2d7)
-      flex-direction: column
-      justify-content: center
-      @media screen and (max-width: $mobile-screen-width)
-        display: flex
-      .title--text
-        font-size: 1.25 rem
-
-    .desktop.subpage--title
-      line-height: 60px
-      font-size: 2.5rem
-      .title--text
-        height: 100%
-
-      @media screen and (max-width: $mobile-screen-width)
-        display: none
-
-      .divider
-        margin:  auto
-        width: 50px
-        height: 5px
-        background-color: black
+[role="GameName"]
+  text-align: center
