@@ -4,14 +4,14 @@
       <template v-if="showAnchor && booth.slug">
         <a :href="`#${booth.slug}`" :key="index">
           <Chip
-            :logoUri="booth.image_url"
+            :logoUri="booth.imageUrl"
             :isActive="userSeals.findIndex(seal => seal.deliver === booth.slug)> -1"
           />
         </a>
       </template>
       <template v-else>
         <Chip
-          :logoUri="booth.image_url"
+          :logoUri="booth.imageUrl"
           :isActive="userSeals.findIndex(seal => seal.deliver === booth.slug)> -1"
           :key="index"
         />

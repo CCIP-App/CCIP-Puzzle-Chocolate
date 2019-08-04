@@ -2,7 +2,7 @@
   <div role="boothList">
     <template v-for="(booth, index) in booths">
       <div role="booth" :key="index" :id="booth.slug">
-        <div role="logo"><img :src="booth.image_url"></div>
+        <div role="logo"><img :src="booth.imageUrl"></div>
         <div role="description">
           <h1>{{ booth.displayText[$i18n.locale] }}</h1>
           <p>{{ booth.description[$i18n.locale] }}</p>
