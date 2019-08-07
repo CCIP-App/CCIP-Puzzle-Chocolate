@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   name: 'QrcodeReader',
   props: {
@@ -48,6 +49,9 @@ export default {
     enable: function (state) {
       var self = this
       self.scanner.setStopped(!state)
+    },
+    result (newValue) {
+      this.emitResult(this, newValue)
     }
   },
   mounted () {
@@ -75,8 +79,11 @@ export default {
   methods: {
     onSuccess (result) {
       this.result = result
-      this.$emit('success', result)
     },
+    emitResult: _.debounce((that, newValue) => {
+      console.log('trigger')
+      that.$emit('success', newValue)
+    }, 500),
     uploadChange () {
       var self = this
       var file = document.getElementById('upload').files[0]
