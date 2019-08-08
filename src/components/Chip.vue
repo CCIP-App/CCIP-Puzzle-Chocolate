@@ -1,6 +1,9 @@
 <template>
   <div role="chip" :class="{ active: isActive }">
-    <img :src="logourl">
+    <img role="logo" :src="logourl">
+    <div role="stampImg">
+      <img src="@/assets/OPASS-pass-stamp.png">
+    </div>
   </div>
 </template>
 
@@ -28,3 +31,12 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+  [role="stampImg"]
+    overflow: hidden
+    margin: -50% calc(-100% * 7 / 8 )
+    img
+      width: calc(((100vw - 2rem) / var(--edgeLength)) / 2 * 1.5) !important
+
+</style>
