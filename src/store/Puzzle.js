@@ -14,7 +14,9 @@ const types = {
 }
 
 const getters = {
-  fragments: (state) => state.fragments
+  fragments: (state) => state.fragments,
+  stamps: (state) => state.stamps,
+  playerPubToken: (state) => state.playerPubToken
 }
 
 const actions = {
@@ -27,15 +29,15 @@ const actions = {
   },
   fetchPuzzleBook: async (context) => {
     const res = await apiClient.player.getUserStamps(context.state.playerPubToken)
-    const { puzzles: fragments, delivers: slugOfStamps } = res.data
-    context.commit('UPDATE_FRAGMENT', fragments)
-    context.commit('UPDATE_STAMPS', slugOfStamps)
+    const { puzzles: fragments, delivers: slugOfStamps } = res
+    context.commit('UPDATE_FRAGMENT', fragments || [])
+    context.commit('UPDATE_STAMPS', slugOfStamps || [])
   }
 }
 
 const mutations = {
   SET_TOKEN: (state, token) => {
-    state.token = token
+    state.playerPubToken = token
   },
   UPDATE_FRAGMENT: (state, fragments) => {
     state.fragments = fragments
