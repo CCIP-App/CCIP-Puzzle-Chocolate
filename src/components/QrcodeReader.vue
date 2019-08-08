@@ -81,7 +81,6 @@ export default {
       this.result = result
     },
     emitResult: _.debounce((that, newValue) => {
-      console.log('trigger')
       that.$emit('success', newValue)
     }, 500),
     uploadChange () {
