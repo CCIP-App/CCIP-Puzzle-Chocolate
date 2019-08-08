@@ -5,14 +5,14 @@
         <a :href="`#${booth.slug}`" :key="index">
           <Chip
             :logoUri="booth.imageUrl"
-            :isActive="userSeals.findIndex(seal => seal.deliver === booth.slug)> -1"
+            :isActive="userStamps.findIndex(stamp => stamp.deliver === booth.slug)> -1"
           />
         </a>
       </template>
       <template v-else>
         <Chip
           :logoUri="booth.imageUrl"
-          :isActive="userSeals.findIndex(seal => seal.deliver === booth.slug)> -1"
+          :isActive="userStamps.findIndex(stamp => stamp.deliver === booth.slug)> -1"
           :key="index"
         />
       </template>
@@ -28,7 +28,7 @@ export default {
       type: Array,
       default: () => []
     },
-    userSeals: {
+    userStamps: {
       type: Array,
       default: () => []
     },
@@ -69,4 +69,14 @@ export default {
       padding: 0
       width: 100%
       height: auto
+
+    &.active
+      [role="stampImg"]
+        display: block !important
+
+  [role="stampImg"]
+    width: calc(((100vw - 2rem) / var(--edgeLength)) / 2 * 1.5)
+    height: calc(((100vw - 2rem) / var(--edgeLength)) / 2 * 1.5)
+    z-index: 999
+    display: none
 </style>
