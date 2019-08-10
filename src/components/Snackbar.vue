@@ -1,6 +1,6 @@
 <template>
   <div role="snackbar" :class="{ active: isActive }">
-    <div class="wrapper">{{ messages }}</div>
+    <div class="wrapper"><slot></slot></div>
   </div>
 </template>
 
@@ -8,10 +8,6 @@
 export default {
   name: 'Snackbar',
   props: {
-    messages: {
-      type: String,
-      default: null
-    },
     isActive: {
       type: Boolean,
       default: false
