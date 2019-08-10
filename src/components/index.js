@@ -5,6 +5,7 @@ import FragmentList from './FragmentList.vue'
 import Header from './Header.vue'
 import QrcodeReader from './QrcodeReader.vue'
 import SquareGrid from './SquareGrid.vue'
+import Snackbar from './Snackbar.vue'
 
 export default {
   BoothList,
@@ -13,5 +14,6 @@ export default {
   FragmentList,
   Header,
   QrcodeReader,
-  SquareGrid
+  SquareGrid,
+  Snackbar
 }

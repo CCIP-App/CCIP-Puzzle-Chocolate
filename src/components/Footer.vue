@@ -23,7 +23,6 @@ export default {
   display: flex
   justify-content: center
   align-items: flex-end
-  flex-grow: 1
   .content
     padding: 2em
   .fillet-label
