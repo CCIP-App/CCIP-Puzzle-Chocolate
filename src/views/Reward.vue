@@ -71,7 +71,7 @@ export default {
     this.$store.dispatch('fetchBooths')
     const token = this.$route.query.token || null
     if (token !== null) {
-      this.$store.dispatch('setPubTokenFromToken', token)
+      this.$store.dispatch('setPubToken', token)
       this.$store.dispatch('fetchPuzzleBook')
     }
   },

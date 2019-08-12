@@ -27,6 +27,9 @@ const actions = {
 
     context.commit('SET_TOKEN', pubToken)
   },
+  setPubToken: (context, pubToken) => {
+    context.commit('SET_TOKEN', pubToken)
+  },
   fetchPuzzleBook: async (context) => {
     const res = await apiClient.player.getUserStamps(context.state.playerPubToken)
     const { puzzles: fragments, deliverers: slugOfStamps } = res
