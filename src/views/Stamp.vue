@@ -3,6 +3,7 @@
     <h1 role="title">攤位蓋章機</h1>
     <template v-if="boothToken !== null && slug !== null">
       <div role="booth-info">
+        <h1 role="booth-displayText">已登入為</h1>
         <div role="booth-logo">
           <img :src="boothProfile.imageUrl" alt="">
         </div>
@@ -15,22 +16,25 @@
         @success="onScanSuccess"
         role="stampScanner"
       ></qrcode-reader>
-    <div role="information">
-
-    </div>
+    <Snackbar :isActive="showSnackbar">
+      {{ message }}
+    </Snackbar>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import apiClient from '@/utils/apiClient.js'
+import { setTimeout } from 'timers'
 export default {
   name: 'Stamp',
   data () {
     return {
       boothToken: null,
       slug: null,
-      playerToken: null
+      playerToken: null,
+      showSnackbar: false,
+      message: ''
     }
   },
   computed: {
@@ -39,14 +43,37 @@ export default {
       return (this.slug && this.booth(this.slug)) || null
     }
   },
+  watch: {
+    async boothToken (newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.slug = await apiClient.booth.getSlugByToken(this.boothToken)
+      }
+    },
+    async playerToken (newValue, oldValue) {
+      if (newValue === null) return
+      try {
+        await apiClient.booth.sendReward2Player(this.boothToken, this.playerToken)
+        const { data: nickName } = await apiClient.get(`landing?token=${this.playerToken}`)
+        this.message = this.$t('sendRewardSuccess', { playerName: nickName, gameReward: this.$t('_stamp') })
+      } catch (e) {
+        const { response: { data: { message } } } = e
+        this.message = message
+      }
+      this.playerToken = null
+      this.showSnackbar = true
+
+      setTimeout(function () {
+        this.showSnackbar = false
+      }.bind(this), 5000)
+    }
+  },
   mounted () {
     this.boothToken = this.$route.query.token || null
   },
   methods: {
     async onScanSuccess (value) {
-      if (this.boothToken === null) {
+      if (this.boothToken === null || this.boothProfile === null) {
         this.boothToken = value
-        this.slug = await apiClient.booth.getSlugByToken(this.boothToken)
       } else if (value !== this.boothToken) {
         this.playerToken = value
       }
@@ -68,6 +95,7 @@ export default {
     border-color: #fff
     border-radius: 5px
     width: 50vw
+    max-width: 320px
   [role="booth-displayText"]
     margin: 0 auto
     text-align: center
@@ -78,11 +106,4 @@ export default {
     img
       max-width: 200px
       max-height: 150px
-  [role="information"]
-    position: absolute
-    bottom: 0
-    width: 100vw
-    min-height: 100px
-    & .info
-      background: #67328c
 </style>
