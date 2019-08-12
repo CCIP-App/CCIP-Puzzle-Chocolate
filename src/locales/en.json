@@ -4,5 +4,8 @@
   "scanner": "QR Code Scanner",
   "reward" : "Reward Card",
   "bingo": "Bingo Card",
-  "fragment": "Fragment Card"
+  "fragment": "Fragment Card",
+  "sendRewardSuccess": "{gameReward} has been sent to {playerName}",
+  "_stamp": "Stamp",
+  "_fragment": "fragment"
 }

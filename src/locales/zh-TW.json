@@ -4,5 +4,8 @@
   "scanner": "QR Code 掃瞄器",
   "reward" : "集章冊",
   "bingo": "賓果冊",
-  "fragment": "碎片收集冊"
+  "fragment": "碎片收集冊",
+  "sendRewardSuccess": "{gameReward} 已經發送給 {playerName}",
+  "_stamp": "戳章",
+  "_fragment": "碎片"
 }
