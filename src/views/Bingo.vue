@@ -62,11 +62,16 @@ export default {
       const LTRB = Array(edgeL).fill(0).map((_, i) => (i + 1) * (edgeL - 1))
       bingosIndex = bingosIndex.concat([RTLB], [LTRB])
 
-      const lines = bingosIndex.map(bingoLine => bingoLine.map(index => this.boothList[index].slug))
+      const lines = bingosIndex.map(bingoLine => bingoLine.map(index => ({
+        slug: this.boothList[index].slug,
+        isBonus: this.boothList[index].isBonus
+      })))
 
       const userDeliverers = this.stamps.map(deliverer => deliverer.deliverer)
 
-      return lines.filter((line) => line.reduce((pv, stamp) => userDeliverers.findIndex(userDeliver => userDeliver === stamp) > -1 && pv, true)).length
+      return lines.filter((line) => line.reduce((pv, stamp) =>
+        (userDeliverers.findIndex(userDeliver => userDeliver === stamp.slug) > -1 ||
+          stamp.isBonus) && pv, true)).length
     }
   },
   created () {
