@@ -221,8 +221,10 @@ const getters = {
 
 const actions = {
   fetchBooths: async (context) => {
-    const response = (await axios.get(configURL)).data
-    context.commit(types.UPDATE_BOOTH, response)
+    if (configURL) {
+      const { data: response } = await axios.get(configURL)
+      context.commit(types.UPDATE_BOOTH, response)
+    }
   }
 }
 
