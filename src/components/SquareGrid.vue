@@ -5,14 +5,14 @@
         <a :href="`#${booth.slug}`" :key="index">
           <Chip
             :logoUri="booth.imageUrl"
-            :isActive="userStamps.findIndex(stamp => stamp.deliver === booth.slug)> -1"
+            :isActive="userStamps.findIndex(stamp => stamp.deliverer === booth.slug)> -1"
           />
         </a>
       </template>
       <template v-else>
         <Chip
           :logoUri="booth.imageUrl"
-          :isActive="userStamps.findIndex(stamp => stamp.deliver === booth.slug)> -1"
+          :isActive="userStamps.findIndex(stamp => stamp.deliverer === booth.slug)> -1"
           :key="index"
         />
       </template>

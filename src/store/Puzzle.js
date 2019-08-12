@@ -29,7 +29,7 @@ const actions = {
   },
   fetchPuzzleBook: async (context) => {
     const res = await apiClient.player.getUserStamps(context.state.playerPubToken)
-    const { puzzles: fragments, delivers: slugOfStamps } = res
+    const { puzzles: fragments, deliverers: slugOfStamps } = res
     context.commit('UPDATE_FRAGMENT', fragments || [])
     context.commit('UPDATE_STAMPS', slugOfStamps || [])
   }
