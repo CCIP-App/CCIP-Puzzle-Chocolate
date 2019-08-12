@@ -41,6 +41,6 @@ export default function shuffledBingo (patterns) {
       return set
     }, {})
 
-    return patterns.split('').map((pattern) => pattern === '0' ? { significant: 'bonus' } : shuffledBooth[pattern].pop())
+    return patterns.split('').map((pattern) => pattern === '0' ? { isBonus: true } : shuffledBooth[pattern].pop())
   }
 }
