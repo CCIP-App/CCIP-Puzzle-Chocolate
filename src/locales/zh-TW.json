@@ -7,5 +7,6 @@
   "fragment": "碎片收集冊",
   "sendRewardSuccess": "{gameReward} 已經發送給 {playerName}",
   "_stamp": "戳章",
-  "_fragment": "碎片"
+  "_fragment": "碎片",
+  "has_bingos": "已達成 {bingos} 連線"
 }

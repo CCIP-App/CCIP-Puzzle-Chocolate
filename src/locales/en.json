@@ -7,5 +7,7 @@
   "fragment": "Fragment Card",
   "sendRewardSuccess": "{gameReward} has been sent to {playerName}",
   "_stamp": "Stamp",
-  "_fragment": "fragment"
+  "_fragment": "fragment",
+  "has_bingos": "{ bingos } bingos"
+
 }
