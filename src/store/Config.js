@@ -111,7 +111,7 @@ const defaultState = {
       description: { 'zh-TW': '測試敘述', en: 'Test description' },
       imageUrl: 'https://sitcon.org/2019/static/img/sponsor/twnic.png',
       point: 0 },
-    { isBonus: false,
+    { isBonus: true,
       significant: 'c',
       slug: 'coscup',
       displayText: { 'zh-TW': 'COSCUP', en: 'COSCUP' },
