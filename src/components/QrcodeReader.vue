@@ -81,6 +81,7 @@ export default {
       this.result = result
     },
     emitResult: _.debounce((that, newValue) => {
+      that.result = null
       that.$emit('success', newValue)
     }, 500),
     uploadChange () {
@@ -136,7 +137,7 @@ export default {
     min-height: 300px
     @media screen and (max-width: 454px) // must bigger than 454px for two column
       min-height: 150px
-    background: url('../assets/uploadfile.png')
+    background: url('../assets/opencam.png')
     background-size: cover
     background-repeat: no-repeat
     background-position: center
