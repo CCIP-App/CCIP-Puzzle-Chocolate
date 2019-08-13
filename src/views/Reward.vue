@@ -8,6 +8,7 @@
         title
         :subTitle="$t('scan_qrcode')"
         @success="onScanSuccess"
+        @error="onScanFail"
       ></qrcode-reader>
     </template>
     <template v-if="playerPubToken !== null">
@@ -98,6 +99,10 @@ export default {
       setTimeout(function () {
         this.showSnackbar = false
       }.bind(this), 5000)
+    },
+    onScanFail (errorMessage) {
+      this.$store.dispatch('UPDATE_ERROR_MESSAGE', this.$t('qrcode_scan_fail'))
+      this.toggleSnackbar()
     }
   }
 }

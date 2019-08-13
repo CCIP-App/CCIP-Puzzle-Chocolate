@@ -102,7 +102,7 @@ export default {
             // succesfully decoded QR Code.
             self.onSuccess(result.text)
           }, function () {
-            self.$emit('OnError', 'no qr code found')
+            self.$emit('error', 'no qr code found')
           })
         }
         image.src = this.result

@@ -14,6 +14,7 @@
         :enable="true"
         :noResult="true"
         @success="onScanSuccess"
+        @error="onScanFail"
         role="stampScanner"
       ></qrcode-reader>
     <Snackbar :isActive="showSnackbar">
@@ -82,6 +83,10 @@ export default {
         this.showSnackbar = false
         this.playerToken = null
       }.bind(this), 5000)
+    },
+    onScanFail (errorMessage) {
+      this.message = this.$t('qrcode_scan_fail')
+      this.toggleSnackbar()
     }
   }
 }

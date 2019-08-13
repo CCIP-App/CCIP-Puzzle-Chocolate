@@ -1,7 +1,7 @@
 <template>
   <div role="bingo">
     <h1 role="GameName">{{ $t('bingo') }}</h1>
-    <h2 role="bingos">{{ $t('has_bingos', { bingos: bingos.toString() }) }}</h2>
+    <h2 role="bingos" v-if="playerPubToken">{{ $t('has_bingos', { bingos: bingos.toString() }) }}</h2>
     <template v-if="showScanner">
       <qrcode-reader
         :enable="showScanner"
@@ -9,12 +9,16 @@
         title
         :subTitle="$t('scan_qrcode')"
         @success="onScanSuccess"
+        @error="onScanFail"
       ></qrcode-reader>
     </template>
     <template v-if="playerPubToken !== null">
       <SquareGrid :booths="boothList" :userStamps="stamps" :showAnchor="true" />
       <BoothList :booths="booths" />
     </template>
+    <Snackbar :isActive="showSnackbar">
+      {{ message }}
+    </Snackbar>
   </div>
 </template>
 
@@ -25,6 +29,12 @@ import bingoShuffler from '@/utils/shuffledBingo.js'
 
 export default {
   name: 'Bingo',
+  data () {
+    return {
+      showSnackbar: false,
+      message: null
+    }
+  },
   computed: {
     ...mapGetters(['booths', 'bingoPatterns', 'stamps', 'playerPubToken']),
     showScanner () {
@@ -32,7 +42,7 @@ export default {
     },
     boothList () {
       const shuffled = bingoShuffler(this.bingoPatterns)(
-        this.playerPubToken,
+        this.playerPubToken || '',
         this.booths.map(booth => ({
           isBonus: booth.isBonus,
           significant: booth.significant,
@@ -107,6 +117,16 @@ export default {
     onScanSuccess (scanValue) {
       this.$store.dispatch('setPubTokenFromToken', scanValue)
       this.$store.dispatch('fetchPuzzleBook')
+    },
+    onScanFail (errorMessage) {
+      this.message = this.$t('qrcode_scan_fail')
+      this.toggleSnackbar()
+    },
+    toggleSnackbar () {
+      this.showSnackbar = true
+      setTimeout(function () {
+        this.showSnackbar = false
+      }.bind(this), 5000)
     }
   }
 }
