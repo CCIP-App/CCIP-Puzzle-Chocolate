@@ -15,6 +15,9 @@
       <SquareGrid :booths="boothList" :userStamps="stamps" :showAnchor="true" />
       <BoothList :booths="booths" />
     </template>
+    <Snackbar :isActive="showSnackbar">
+      {{ puzzleErrorMessage }}
+    </Snackbar>
   </div>
 </template>
 
@@ -22,8 +25,13 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'Reward',
+  data () {
+    return {
+      showSnackbar: false
+    }
+  },
   computed: {
-    ...mapGetters(['booths', 'stamps', 'playerPubToken']),
+    ...mapGetters(['booths', 'stamps', 'playerPubToken', 'puzzleErrorMessage']),
     showScanner () {
       return this.playerPubToken === null
     },
@@ -67,6 +75,11 @@ export default {
       )
     }
   },
+  watch: {
+    puzzleErrorMessage () {
+      this.toggleSnackbar()
+    }
+  },
   created () {
     this.$store.dispatch('fetchBooths')
     const token = this.$route.query.token || null
@@ -79,6 +92,12 @@ export default {
     onScanSuccess (scanValue) {
       this.$store.dispatch('setPubTokenFromToken', scanValue)
       this.$store.dispatch('fetchPuzzleBook')
+    },
+    toggleSnackbar () {
+      this.showSnackbar = true
+      setTimeout(function () {
+        this.showSnackbar = false
+      }.bind(this), 5000)
     }
   }
 }

@@ -51,20 +51,18 @@ export default {
     },
     async playerToken (newValue, oldValue) {
       if (newValue === null) return
+      this.message = `Processing`
+      this.toggleSnackbar()
       try {
         await apiClient.booth.sendReward2Player(this.boothToken, this.playerToken)
         const { data: nickName } = await apiClient.get(`landing?token=${this.playerToken}`)
         this.message = this.$t('sendRewardSuccess', { playerName: nickName, gameReward: this.$t('_stamp') })
       } catch (e) {
         const { response: { data: { message } } } = e
-        this.message = message
+        this.message = this.$t(message)
       }
-      this.playerToken = null
-      this.showSnackbar = true
 
-      setTimeout(function () {
-        this.showSnackbar = false
-      }.bind(this), 5000)
+      this.toggleSnackbar()
     }
   },
   mounted () {
@@ -77,6 +75,13 @@ export default {
       } else if (value !== this.boothToken) {
         this.playerToken = value
       }
+    },
+    toggleSnackbar () {
+      this.showSnackbar = true
+      setTimeout(function () {
+        this.showSnackbar = false
+        this.playerToken = null
+      }.bind(this), 5000)
     }
   }
 }
