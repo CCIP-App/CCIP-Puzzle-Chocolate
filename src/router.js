@@ -12,9 +12,9 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
-    { path: '/Stamp', component: Stamp },
-    { path: '/Reward', component: Reward },
-    { path: '/Bingo', component: Bingo },
-    { path: '/Fragment', component: Fragment }
+    { path: '/stamp', component: Stamp },
+    { path: '/reward', component: Reward },
+    { path: '/bingo', component: Bingo },
+    { path: '/fragment', component: Fragment }
   ]
 })

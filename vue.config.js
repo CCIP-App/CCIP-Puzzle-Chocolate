@@ -9,10 +9,10 @@ module.exports = {
     prerenderSpa: {
       registry: undefined,
       renderRoutes: [
-        '/Stamp',
-        '/Reward',
-        '/Bingo',
-        '/Fragment'
+        '/stamp',
+        '/reward',
+        '/bingo',
+        '/fragment'
       ],
       useRenderEvent: true,
       headless: true,
