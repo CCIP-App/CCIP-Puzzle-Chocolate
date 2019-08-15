@@ -1,6 +1,6 @@
 <template>
   <div role="chip" :class="{ active: isActive }">
-    <img role="logo" :src="logourl">
+    <img role="logo" :src="logourl" :alt="displayName">
     <div role="stampImg">
       <img src="@/assets/OPASS-pass-stamp.png">
     </div>

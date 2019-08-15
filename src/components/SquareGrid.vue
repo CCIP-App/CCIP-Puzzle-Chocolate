@@ -5,6 +5,7 @@
         <a :href="`#${booth.slug}`" :key="index">
           <Chip
             :logoUri="booth.imageUrl"
+            :displayName="booth.displayText"
             :isActive="userStamps.findIndex(stamp => stamp.deliverer === booth.slug)> -1 || booth.isBonus"
           />
         </a>
@@ -12,6 +13,7 @@
       <template v-else>
         <Chip
           :logoUri="booth.imageUrl"
+          :displayName="booth.displayText"
           :isActive="userStamps.findIndex(stamp => stamp.deliverer === booth.slug)> -1 || booth.isBonus"
           :key="index"
         />
