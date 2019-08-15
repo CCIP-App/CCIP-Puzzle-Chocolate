@@ -40,9 +40,10 @@ export default {
 
     [role="logo"]
       width: 25%
-      align-items: center
 
       img
+        display: block
+        margin: auto
         max-width: 100%
         max-height: calc(25vw/4*3)
     [role="description"]
