@@ -208,7 +208,7 @@ const defaultState = {
 }
 
 const types = {
-  UPDATE_BOOTH: 'UPDATE_BOOTH'
+  UPDATE_CONFIG: 'UPDATE_CONFIG'
 }
 
 const getters = {
@@ -220,17 +220,20 @@ const getters = {
 }
 
 const actions = {
-  fetchBooths: async (context) => {
+  fetchGameConfig: async (context) => {
     if (configURL) {
       const { data: response } = await axios.get(configURL)
-      context.commit(types.UPDATE_BOOTH, response)
+      context.commit(types.UPDATE_CONFIG, response)
     }
   }
 }
 
 const mutations = {
-  UPDATE_BOOTH: (state, data) => {
+  UPDATE_CONFIG: (state, data) => {
     state.booths = data.booths
+    state.confName = data.confName
+    state.title = data.title
+    state.bingoPatterns = data.bingoPatterns
   }
 }
 

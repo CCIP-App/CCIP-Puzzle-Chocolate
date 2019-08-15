@@ -106,7 +106,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('fetchBooths')
+    this.$store.dispatch('fetchGameConfig')
     const token = this.$route.query.token || null
     if (token !== null) {
       this.$store.dispatch('setPubToken', token)
