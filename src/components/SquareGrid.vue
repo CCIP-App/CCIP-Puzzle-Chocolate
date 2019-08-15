@@ -67,10 +67,10 @@ export default {
 
     img
       display: inline-block
-      margin: auto 0
-      padding: 0
-      width: 100%
-      height: auto
+      margin: auto
+      padding: 3px
+      max-width: 100%
+      max-height: 100%
 
     &.active
       [role="stampImg"]
