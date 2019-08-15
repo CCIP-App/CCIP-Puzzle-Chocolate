@@ -66,6 +66,9 @@ export default {
       this.toggleSnackbar()
     }
   },
+  created () {
+    this.$store.dispatch('fetchBooths')
+  },
   mounted () {
     this.boothToken = this.$route.query.token || null
   },
