@@ -8,7 +8,13 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created () {
+    const language = (navigator.languages[0] || navigator.language || navigator.browserLanguage).toLowerCase()
+    if (!language.includes('zh')) {
+      this.$i18n.locale = 'en'
+    }
+  }
 }
 </script>
 
