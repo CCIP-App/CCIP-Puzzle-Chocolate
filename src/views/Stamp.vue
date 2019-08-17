@@ -27,6 +27,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import apiClient from '@/utils/apiClient.js'
+import axios from '@/utils/http.js'
 import { setTimeout } from 'timers'
 export default {
   name: 'Stamp',
@@ -65,7 +66,7 @@ export default {
       this.toggleSnackbar()
       try {
         await apiClient.booth.sendReward2Player(this.boothToken, this.playerToken)
-        const { data: nickName } = await apiClient.get(`landing?token=${this.playerToken}`)
+        const { data: { nickname: nickName } } = await axios.get(`landing?token=${this.playerToken}`)
         this.message = this.$t('sendRewardSuccess', { playerName: nickName, gameReward: this.$t('_stamp') })
       } catch (e) {
         const { response: { data: { message } } } = e
