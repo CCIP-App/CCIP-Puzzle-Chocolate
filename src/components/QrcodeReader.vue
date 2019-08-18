@@ -51,6 +51,7 @@ export default {
       self.scanner.setStopped(!state)
     },
     result (newValue) {
+      if (newValue === null) return
       this.emitResult(this, newValue)
     }
   },
