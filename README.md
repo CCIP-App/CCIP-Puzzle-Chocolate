@@ -40,11 +40,9 @@ There will be two way to prepare configration:
 
 2. Using google separeatesheet template and converting script writing on node.js
 
-```
-TBC
-```
+Using [CCIP-App/CCIP-Puzzle-Config-Generator-Chocolate](https://github.com/CCIP-App/CCIP-Puzzle-Config-Generator-Chocolate)
 
-More detail see [Configuration file](#Configration-file)
+More detail about configuration see [Configuration file](#Configration-file)
 
 ### Set project configuration and build
 
