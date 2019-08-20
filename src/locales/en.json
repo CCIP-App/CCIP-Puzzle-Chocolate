@@ -12,5 +12,6 @@
   "Already take from this deliverer": "Already take from this deliverer",
   "invalid receiver token": "Invalid receiver token",
   "token and receiver required": "Token and receiver required",
-  "qrcode_scan_fail": "QRCode not found, please retry after adjust screen brightness of QRCode and photo shooting angle"
+  "qrcode_scan_fail": "QRCode not found, please retry after adjust screen brightness of QRCode and photo shooting angle",
+  "Game configuration is not correct": "Game configuration is not correct. Please report this problem to staffs."
 }
