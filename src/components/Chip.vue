@@ -33,9 +33,13 @@ export default {
 </script>
 
 <style lang="stylus">
+[role="chip"]
+  position relative
   [role="stampImg"]
-    overflow: hidden
-    margin: -50% calc(-100% * 7 / 8 )
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
     img
       width: calc(((100vw - 2rem) / var(--edgeLength)) / 2 * 1.5) !important
 
