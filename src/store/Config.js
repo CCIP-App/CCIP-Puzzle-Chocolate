@@ -7,7 +7,7 @@ const defaultState = {
     'zh-TW': '',
     en: ''
   },
-  bingoPatterns: '',
+  bingoPattern: '',
   booths: []
 }
 
@@ -18,7 +18,7 @@ const types = {
 const getters = {
   confName: state => state.confName,
   title: state => lang => state.title[lang],
-  bingoPatterns: state => state.bingoPatterns,
+  bingoPattern: state => state.bingoPattern,
   booths: state => state.booths,
   booth: state => slug => state.booths.find(booth => booth.slug === slug)
 }
@@ -37,7 +37,7 @@ const mutations = {
     state.booths = data.booths
     state.confName = data.confName
     state.title = data.title
-    state.bingoPatterns = data.bingoPatterns
+    state.bingoPattern = data.bingoPattern
   }
 }
 

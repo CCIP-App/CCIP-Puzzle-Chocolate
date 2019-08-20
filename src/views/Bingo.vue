@@ -41,9 +41,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['booths', 'bingoPatterns', 'stamps', 'playerPubToken']),
+    ...mapGetters(['booths', 'bingoPattern', 'stamps', 'playerPubToken']),
     isConfigurationCorrect () {
-      const matchedSignificant = this.bingoPatterns
+      const matchedSignificant = this.bingoPattern
         .split('')
         .reduce((counter, pattern) => {
           const target = counter.find(p => p.pattern === pattern)
@@ -69,8 +69,8 @@ export default {
         console.warn('Some booth will missing on bingo table for some player, see situation 3, case 2, issue #2. https://github.com/CCIP-App/CCIP-Puzzle-Chocolate/issues/2')
       }
 
-      return this.bingoPatterns.length > 0 &&
-        this.isSquareNumber(this.bingoPatterns.length) === false &&
+      return this.bingoPattern.length > 0 &&
+        this.isSquareNumber(this.bingoPattern.length) === false &&
         isBoothLacking === false
     },
     showScanner () {
@@ -80,7 +80,7 @@ export default {
       if (this.isConfigurationCorrect === false) {
         return []
       }
-      const shuffled = bingoShuffler(this.bingoPatterns)(
+      const shuffled = bingoShuffler(this.bingoPattern)(
         this.playerPubToken || '',
         this.booths.map(booth => ({
           isBonus: booth.isBonus,
