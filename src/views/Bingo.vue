@@ -54,13 +54,15 @@ export default {
           }
           return counter
         }, [])
-        .map((pattern) => Object.assign(pattern, { matched: this.boothList.filter(booth => booth.significant === pattern).length }))
+        .map((pattern) => Object.assign(pattern, { matched: this.booths.filter(booth => booth.significant === pattern.pattern).length }))
 
       let isBoothLacking = false
       let isBoothMaybeMissingOnBingo = false
       matchedSignificant.forEach(pattern => {
-        isBoothLacking = pattern.count > pattern.matched && isBoothLacking
-        isBoothMaybeMissingOnBingo = pattern.count < pattern.matched && isBoothMaybeMissingOnBingo
+        if (pattern.pattern !== '0') {
+          isBoothLacking = pattern.count > pattern.matched && isBoothLacking
+          isBoothMaybeMissingOnBingo = pattern.count < pattern.matched && isBoothMaybeMissingOnBingo
+        }
       })
 
       if (isBoothMaybeMissingOnBingo) {
