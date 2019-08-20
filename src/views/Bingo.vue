@@ -12,9 +12,14 @@
         @error="onScanFail"
       ></qrcode-reader>
     </template>
-    <template v-if="playerPubToken !== null">
+    <template v-if="playerPubToken !== null && isConfigurationCorrect">
       <SquareGrid :booths="boothList" :userStamps="stamps" :showAnchor="true" />
       <BoothList :booths="booths" />
+    </template>
+    <template v-if="!isConfigurationCorrect">
+      <div role="bingoPatternWrong">
+        <p>{{ $t('Game configuration is not correct') }}</p>
+      </div>
     </template>
     <Snackbar :isActive="showSnackbar">
       {{ message }}
@@ -37,10 +42,42 @@ export default {
   },
   computed: {
     ...mapGetters(['booths', 'bingoPatterns', 'stamps', 'playerPubToken']),
+    isConfigurationCorrect () {
+      const matchedSignificant = this.bingoPatterns
+        .split('')
+        .reduce((counter, pattern) => {
+          const target = counter.find(p => p.pattern === pattern)
+          if (target) {
+            target.count += 1
+          } else {
+            counter.push({ pattern, count: 1 })
+          }
+          return counter
+        }, [])
+        .map((pattern) => Object.assign(pattern, { matched: this.boothList.filter(booth => booth.significant === pattern).length }))
+
+      let isBoothLacking = false
+      let isBoothMaybeMissingOnBingo = false
+      matchedSignificant.forEach(pattern => {
+        isBoothLacking = pattern.count > pattern.matched && isBoothLacking
+        isBoothMaybeMissingOnBingo = pattern.count < pattern.matched && isBoothMaybeMissingOnBingo
+      })
+
+      if (isBoothMaybeMissingOnBingo) {
+        console.warn('Some booth will missing on bingo table for some player, see situation 3, case 2, issue #2. https://github.com/CCIP-App/CCIP-Puzzle-Chocolate/issues/2')
+      }
+
+      return this.bingoPatterns.length > 0 &&
+        this.isSquareNumber(this.bingoPatterns.length) === false &&
+        isBoothLacking === false
+    },
     showScanner () {
-      return this.playerPubToken === null
+      return this.playerPubToken === null && this.isConfigurationCorrect
     },
     boothList () {
+      if (this.isConfigurationCorrect === false) {
+        return []
+      }
       const shuffled = bingoShuffler(this.bingoPatterns)(
         this.playerPubToken || '',
         this.booths.map(booth => ({
@@ -114,6 +151,9 @@ export default {
     }
   },
   methods: {
+    isSquareNumber (number) {
+      return number % Math.sqrt(number, 2) === 0
+    },
     onScanSuccess (scanValue) {
       this.$store.dispatch('setPubTokenFromToken', scanValue)
       this.$store.dispatch('fetchPuzzleBook')
@@ -133,7 +173,8 @@ export default {
 </script>
 
 <style lang="stylus">
-[role='bingos'] {
-  text-align: center;
-}
+[role='bingos']
+  text-align: center
+[role='bingoPatternWrong']
+  text-align: center
 </style>

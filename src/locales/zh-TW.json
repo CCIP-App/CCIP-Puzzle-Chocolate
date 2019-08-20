@@ -12,5 +12,6 @@
   "Already take from this deliverer": "已經蓋過章囉(￣▽￣)",
   "invalid receiver token": "條碼好像不正確(⊙ω⊙)",
   "token and receiver required": "好像抓不到條碼(;´༎ຶД༎ຶ`)",
-  "qrcode_scan_fail": "無法識別 QR Code，請嘗試調整亮度與拍照角度試試"
+  "qrcode_scan_fail": "無法識別 QR Code，請嘗試調整亮度與拍照角度試試",
+  "Game configuration is not correct": "遊戲設定檔異常，無法進行遊戲，請回報給工作人員(´・ω・`)"
 }
