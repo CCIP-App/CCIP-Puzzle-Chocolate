@@ -70,7 +70,7 @@ export default {
       }
 
       return this.bingoPattern.length > 0 &&
-        this.isSquareNumber(this.bingoPattern.length) === false &&
+        this.isSquareNumber(this.bingoPattern.length) === true &&
         isBoothLacking === false
     },
     showScanner () {
