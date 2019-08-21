@@ -9,6 +9,7 @@ module.exports = {
     prerenderSpa: {
       registry: undefined,
       renderRoutes: [
+        '/',
         '/stamp',
         '/reward',
         '/bingo',
