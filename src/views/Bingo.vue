@@ -21,8 +21,11 @@
         <p>{{ $t('Game configuration is not correct') }}</p>
       </div>
     </template>
-    <Snackbar :isActive="showSnackbar">
-      {{ message }}
+    <Snackbar :isActive="showErrorMessage">
+      {{ errorMessage }}
+      <template v-if="stamps.length === 0">
+        <button role="retry" @click="retryScanner">Retry</button>
+      </template>
     </Snackbar>
   </div>
 </template>
@@ -34,14 +37,8 @@ import bingoShuffler from '@/utils/shuffledBingo.js'
 
 export default {
   name: 'Bingo',
-  data () {
-    return {
-      showSnackbar: false,
-      message: null
-    }
-  },
   computed: {
-    ...mapGetters(['booths', 'bingoPattern', 'stamps', 'playerPubToken']),
+    ...mapGetters(['booths', 'bingoPattern', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage']),
     isConfigurationCorrect () {
       const matchedSignificant = this.bingoPattern
         .split('')
@@ -161,14 +158,15 @@ export default {
       this.$store.dispatch('fetchPuzzleBook')
     },
     onScanFail (errorMessage) {
-      this.message = this.$t('qrcode_scan_fail')
+      this.$store.dispatch('setErrorMessage', this.$t('qrcode_scan_fail'))
       this.toggleSnackbar()
     },
     toggleSnackbar () {
-      this.showSnackbar = true
-      setTimeout(function () {
-        this.showSnackbar = false
-      }.bind(this), 5000)
+      this.$store.dispatch('showErrorMessage')
+    },
+    retryScanner () {
+      this.$store.dispatch('setPubToken', null)
+      this.toggleSnackbar()
     }
   }
 }
@@ -179,4 +177,13 @@ export default {
   text-align: center
 [role='bingoPatternWrong']
   text-align: center
+[role="retry"]
+  text-align right
+  margin-right 0
+  margin-left auto
+  border none
+  background transparent
+  text-decoration underline
+  color rgb(91.7%, 91.7%, 2.1%)
+  font-weight 500
 </style>

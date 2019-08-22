@@ -18,7 +18,8 @@ export default {
 
 <style lang="stylus">
   [role="snackbar"]
-    position absolute
+    z-index 1000
+    position fixed
     color #fff
     display block
     background-color #323232
@@ -42,6 +43,7 @@ export default {
       opacity 1
 
     .wrapper
+      width 100%
       padding 9px 16px
       min-height 48px
       display inline-flex

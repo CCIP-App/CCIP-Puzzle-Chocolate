@@ -5,21 +5,24 @@ const defaultState = {
   playerPubToken: null,
   stamps: [],
   fragments: [],
-  errorMessage: null
+  errorMessage: null,
+  showErrorMessage: false
 }
 
 const types = {
   SET_TOKEN: 'SET_TOKEN',
   UPDATE_FRAGMENT: 'UPDATE_FRAGMENT',
   UPDATE_STAMPS: 'UPDATE_STAMPS',
-  UPDATE_ERROR_MESSAGE: 'UPDATE_ERROR_MESSAGE'
+  UPDATE_ERROR_MESSAGE: 'UPDATE_ERROR_MESSAGE',
+  UPDATE_SHOW_ERROR_MESSAGE: 'UPDATE_SHOW_ERROR_MESSAGE'
 }
 
 const getters = {
   fragments: (state) => state.fragments,
   stamps: (state) => state.stamps,
   playerPubToken: (state) => state.playerPubToken,
-  puzzleErrorMessage: (state) => state.errorMessage
+  errorMessage: (state) => state.errorMessage,
+  showErrorMessage: (state) => state.showErrorMessage
 }
 
 const actions = {
@@ -33,6 +36,9 @@ const actions = {
   setPubToken: (context, pubToken) => {
     context.commit('SET_TOKEN', pubToken)
   },
+  setErrorMessage: (context, newValue) => {
+    context.commit('UPDATE_ERROR_MESSAGE', newValue)
+  },
   fetchPuzzleBook: async (context) => {
     try {
       const res = await apiClient.player.getUserStamps(context.state.playerPubToken)
@@ -41,11 +47,16 @@ const actions = {
       context.commit('UPDATE_STAMPS', slugOfStamps || [])
     } catch (e) {
       const { response: { data: { message } } } = e
-      context.commit('SET_TOKEN', null)
       context.commit('UPDATE_ERROR_MESSAGE', message)
       context.commit('UPDATE_FRAGMENT', [])
       context.commit('UPDATE_STAMPS', [])
     }
+  },
+  showErrorMessage: (context) => {
+    context.commit('UPDATE_SHOW_ERROR_MESSAGE', true)
+  },
+  hideErrorMessage: (context) => {
+    context.commit('UPDATE_SHOW_ERROR_MESSAGE', false)
   }
 }
 
@@ -61,6 +72,10 @@ const mutations = {
   },
   UPDATE_ERROR_MESSAGE: (state, message) => {
     state.errorMessage = message
+    state.showErrorMessage = true
+  },
+  UPDATE_SHOW_ERROR_MESSAGE: (state) => {
+    state.showErrorMessage = !state.showErrorMessage
   }
 }
 
