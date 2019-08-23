@@ -8,7 +8,7 @@
   "sendRewardSuccess": "{gameReward} has been sent to {playerName}",
   "_stamp": "Stamp",
   "_fragment": "fragment",
-  "has_bingos": "{ bingos } bingos",
+  "has_bingos": "{bingos} bingos",
   "Already take from this deliverer": "Already take from this deliverer",
   "invalid receiver token": "Invalid receiver token",
   "token and receiver required": "Token and receiver required",
