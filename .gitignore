@@ -21,3 +21,5 @@ yarn-error.log*
 *.sw*
 config.js
 config.json
+
+config/project.json
