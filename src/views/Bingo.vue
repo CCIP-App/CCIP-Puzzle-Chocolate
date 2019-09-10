@@ -14,6 +14,11 @@
     </template>
     <template v-if="playerPubToken !== null && isConfigurationCorrect">
       <SquareGrid :booths="boothList" :userStamps="stamps" :showAnchor="true" />
+      <div role="game-description" v-if="description($i18n.locale).length > 0">
+        <template v-for="(line, index) in description($i18n.locale).split('\n')">
+          <p :key="index">{{ line }}</p>
+        </template>
+      </div>
       <BoothList :booths="booths" />
     </template>
     <template v-if="!isConfigurationCorrect">
@@ -38,7 +43,7 @@ import bingoShuffler from '@/utils/shuffledBingo.js'
 export default {
   name: 'Bingo',
   computed: {
-    ...mapGetters(['booths', 'bingoPattern', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage']),
+    ...mapGetters(['description', 'booths', 'bingoPattern', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage']),
     isConfigurationCorrect () {
       const matchedSignificant = this.bingoPattern
         .split('')
