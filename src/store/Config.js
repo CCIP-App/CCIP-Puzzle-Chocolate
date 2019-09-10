@@ -41,8 +41,8 @@ const mutations = {
   UPDATE_CONFIG: (state, data) => {
     state.booths = data.booths
     state.confName = data.confName
-    state.title = data.title
-    state.description = data.description
+    state.title = data.title || { en: 'title undefined' }
+    state.description = data.description || { en: 'description undefined' }
     state.bingoPattern = data.bingoPattern
   }
 }

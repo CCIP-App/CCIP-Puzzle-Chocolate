@@ -14,6 +14,11 @@
     <template v-if="playerPubToken !== null">
       <h2 role="got-points">{{ $t('has_got_points', {points: gotPoints}) }}</h2>
       <SquareGrid :booths="boothList" :userStamps="stamps" :showAnchor="true" />
+      <div role="game-description" v-if="description($i18n.locale).length > 0">
+        <template v-for="(line, index) in description($i18n.locale).split('\n')">
+          <p :key="index">{{ line }}</p>
+        </template>
+      </div>
       <BoothList :booths="booths" />
     </template>
     <Snackbar :isActive="showErrorMessage">
@@ -30,7 +35,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Reward',
   computed: {
-    ...mapGetters(['booths', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage']),
+    ...mapGetters(['description', 'booths', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage']),
     showScanner () {
       return this.playerPubToken === null
     },
@@ -103,6 +108,11 @@ export default {
 </script>
 
 <style lang="stylus">
+[role='game-description']
+  background #fff
+  width calc(100vw - 2rem)
+  margin -1rem auto 1rem auto
+  padding 1em
 [role='got-points']
   text-align: center
 [role="retry"]
