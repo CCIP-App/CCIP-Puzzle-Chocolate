@@ -17,6 +17,10 @@ There will be two way to prepare configration:
     "zh-TW": "大地集章",
     "en": "Rewards"
   },
+  "description": {
+    "zh-TW": "大地遊戲說明文字",
+    "en": "Booth reward activity description"
+  },
   "bingoPattern": "",
   "booths": [
     {
