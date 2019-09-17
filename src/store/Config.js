@@ -21,8 +21,8 @@ const types = {
 
 const getters = {
   confName: state => state.confName,
-  title: state => lang => state.title[lang],
-  description: state => lang => state.description[lang],
+  title: state => lang => state.title[lang] || state.title.en,
+  description: state => lang => state.description[lang] || state.description.en,
   bingoPattern: state => state.bingoPattern,
   booths: state => state.booths,
   booth: state => slug => state.booths.find(booth => booth.slug === slug)
