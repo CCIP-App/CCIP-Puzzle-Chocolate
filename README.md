@@ -52,7 +52,7 @@ More detail about configuration see [Configuration file](#Configration-file)
 
 Modify `config/project.json`, given values for `API_URL` with an base url for OPass server side and for `configURL` with an URL point to configuration file which generated on previous step.
 
-Then run `yarn build` to build project and deploy everwhere you want to deploy
+Then run `npm run build` to build project and deploy everwhere you want to deploy
 
 ## Configration file
 
@@ -64,22 +64,22 @@ TBC
 
 ### Install dependency
 ```
-yarn install
+npm run install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+npm run build
 ```
 
 ### Lints and fixes files
 ```
-yarn lint
+npm run lint
 ```
 
 ### Customize configuration
