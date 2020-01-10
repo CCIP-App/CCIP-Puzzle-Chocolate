@@ -11,7 +11,6 @@
       </div>
     </template>
     <qrcode-reader
-        :enable="true"
         :noResult="true"
         @success="onScanSuccess"
         @error="onScanFail"
@@ -47,7 +46,13 @@ export default {
   watch: {
     async boothToken (newValue, oldValue) {
       if (newValue !== oldValue) {
-        this.slug = await apiClient.booth.getSlugByToken(this.boothToken)
+        try {
+          this.slug = await apiClient.booth.getSlugByToken(this.boothToken)
+        } catch (e) {
+          const { response: { data: { message } } } = e
+          this.message = this.$t(message)
+          this.toggleSnackbar()
+        }
       }
     },
     async playerToken (newValue, oldValue) {

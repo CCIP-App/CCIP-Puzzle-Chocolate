@@ -3,7 +3,7 @@
     <h1 role="GameName">{{ $t('reward') }}</h1>
     <template v-if="showScanner">
       <qrcode-reader
-        :enable="showScanner"
+        v-if="showScanner"
         :noResult="true"
         title
         :subTitle="$t('scan_qrcode')"
