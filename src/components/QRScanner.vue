@@ -8,7 +8,7 @@
       <div v-if="!isWebRTCSupported">
         <p>連 iOS 都支援 WebRTC 了，您是不是該換裝置了呢？</p>
       </div>
-      <div v-show="!enable">
+      <div v-show="!enable && isWebRTCSupported">
         <button id="enableButton" class="OpenCamera" @click="startScanner"></button>
       </div>
       <p role="subTitle" v-if="subTitle !== '' ">{{ subTitle }}</p>
