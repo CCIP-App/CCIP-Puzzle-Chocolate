@@ -3,11 +3,13 @@
     <h1 role="title">攤位蓋章機</h1>
     <template v-if="boothToken !== null && slug !== null">
       <div role="booth-info">
-        <h1 role="booth-displayText">已登入為</h1>
         <div role="booth-logo">
           <img :src="boothProfile.imageUrl" alt="">
         </div>
-        <h1 role="booth-displayText">{{ boothProfile.displayText[$i18n.locale] }}</h1>
+        <div role="booth-displayText">
+          <h3>{{ $t('login_as')}}</h3>
+          <h1>{{ boothProfile.displayText[$i18n.locale] }}</h1>
+        </div>
       </div>
     </template>
     <qrcode-reader
@@ -108,21 +110,29 @@ export default {
   [role="stampScanner"]
     margin: 1em auto
   [role="booth-info"]
+    display: grid
+    grid-template-columns: max-content 1fr
+    grid-template-rows: 1fr 3fr
+    grid-gap: 5px
+    grid-template-areas: "logo displayText" "logo displayText"
     padding: 1em
     margin: 1em auto
     background: #fff
     border-style: solid
     border-color: #fff
     border-radius: 5px
-    width: 50vw
-    max-width: 320px
+    max-width: max-content
   [role="booth-displayText"]
-    margin: 0 auto
     text-align: center
+    grid-area: displayText
+    align-self: center
+    h1
+      margin: 0 auto
+    h3
+      margin: 0 auto 30px auto
   [role="booth-logo"]
-    display: flex
-    justify-content: center
-    margin-bottom: 1em
+    grid-area: logo
+    align-self: center
     img
       max-width: 200px
       max-height: 150px

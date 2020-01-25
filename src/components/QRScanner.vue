@@ -76,6 +76,7 @@ export default {
       this.result = result
     },
     emitResult: _.debounce((that, newValue) => {
+      console.warn('emit result, is', newValue)
       if (that.isIOS) {
         that.disableScanner()
       }
@@ -95,7 +96,22 @@ export default {
     },
     setPreviewSize () {
       const width = window.innerWidth
-      this.previewWidth = (this.width || Math.round(width * 0.8)) + 'px'
+      const height = window.innerHeight
+      const aspect = width / height
+      alert(`width = ${width}, height = ${height}, aspect = ${aspect}`)
+      if (width > height) {
+        if (width >= 1280) {
+          this.previewWidth = (Math.min(Math.round((height - 420) * aspect), 1280)) + 'px'
+        } else {
+          this.previewWidth = (this.width || Math.round(width * 0.8)) + 'px'
+        }
+      } else {
+        if (width <= 576) {
+          this.previewWidth = (Math.round(height * 0.8 * aspect)) + 'px'
+        } else {
+          this.previewWidth = (Math.round(height * 0.4 * aspect)) + 'px'
+        }
+      }
     },
     disableScanner () {
       if (this.scanner) {
