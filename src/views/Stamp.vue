@@ -45,6 +45,8 @@ export default {
   },
   watch: {
     async boothToken (newValue, oldValue) {
+      if (newValue === null) return
+      this.message = `Processing`
       if (newValue !== oldValue) {
         try {
           this.slug = await apiClient.booth.getSlugByToken(this.boothToken)
@@ -90,7 +92,7 @@ export default {
       setTimeout(function () {
         this.showSnackbar = false
         this.playerToken = null
-      }.bind(this), 5000)
+      }.bind(this), 10000)
     },
     onScanFail (errorMessage) {
       this.message = this.$t('qrcode_scan_fail')

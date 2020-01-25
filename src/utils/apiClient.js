@@ -1,6 +1,19 @@
 import axios from './http.js'
 import qs from 'qs'
 
+axios.interceptors.response.use((response) => response, (error) => {
+  const { response: { status } } = error
+  switch (status / 100) {
+    case 5: // 5xx error
+      error.response.data = { message: 'Internal Server Error' }
+      break
+    default:
+      break
+  }
+
+  return Promise.reject(error)
+})
+
 export default {
   booth: {
     getSlugByToken: async (token) => {

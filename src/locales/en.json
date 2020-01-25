@@ -14,5 +14,6 @@
   "token and receiver required": "Token and receiver required",
   "qrcode_scan_fail": "QRCode not found, please retry after adjust screen brightness of QRCode and photo shooting angle",
   "Game configuration is not correct": "Game configuration is not correct. Please report this problem to staffs.",
-  "invalid token": "Invalid Token"
+  "invalid token": "Invalid Token",
+  "Internal Server Error": "Internal Server Error !!! Call Denny Huang ~~~!"
 }
