@@ -2,16 +2,18 @@
   <div id="QRScanner">
   <center>
       <h2 class="ma-0" v-if=" title != '' ">{{ title }}</h2>
-      <div v-show="enable">
-        <video ref="preview" :width="previewWidth" autoplay playsinline></video>
-      </div>
+      <p role="subTitle" v-if="subTitle !== '' ">{{ subTitle }}</p>
       <div v-if="!isWebRTCSupported">
         <p>連 iOS 都支援 WebRTC 了，您是不是該換裝置了呢？</p>
       </div>
-      <div v-show="!enable && isWebRTCSupported">
+      <template v-else>
+        <div v-show="enable">
+          <video ref="preview" :width="previewWidth" autoplay playsinline></video>
+        </div>
+        <div v-show="!enable">
         <button id="enableButton" class="OpenCamera" @click="startScanner"></button>
       </div>
-      <p role="subTitle" v-if="subTitle !== '' ">{{ subTitle }}</p>
+      </template>
       <h6 class="ma-0" v-if=" !noResult ">{{ result }}</h6>
     </center>
   </div>
@@ -86,6 +88,7 @@ export default {
 
         QrScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js'
         this.scanner = new QrScanner(this.$refs.preview, this.scannerCallback)
+        this.scanner.setInversionMode('both')
         this.setPreviewSize()
         this.scanner.start()
       }
