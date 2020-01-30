@@ -98,7 +98,6 @@ export default {
       const width = window.innerWidth
       const height = window.innerHeight
       const aspect = width / height
-      alert(`width = ${width}, height = ${height}, aspect = ${aspect}`)
       if (width > height) {
         if (width >= 1280) {
           this.previewWidth = (Math.min(Math.round((height - 420) * aspect), 1280)) + 'px'
