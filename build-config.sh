@@ -4,5 +4,5 @@ git submodule init
 git submodule update
 cp config.js generator/
 cd $_
-yarn
+npm i
 node index.js > ../dist/config.json

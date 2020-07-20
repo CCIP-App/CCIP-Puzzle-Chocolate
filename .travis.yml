@@ -6,7 +6,7 @@ branches:
   only:
   - master
 before_deploy:
-  - yarn build
+  - npm run build
   - ./build-config.sh
 deploy:
   provider: pages
