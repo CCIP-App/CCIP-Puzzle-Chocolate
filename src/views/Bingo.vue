@@ -5,7 +5,7 @@
     <template v-if="showScanner">
       <qrcode-reader
         :enable="showScanner"
-        :noResult="true"
+        :noResult="false"
         title
         :subTitle="$t('scan_qrcode')"
         @success="onScanSuccess"
