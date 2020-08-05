@@ -18,5 +18,7 @@
   "Invalid token, please try again after checkin.": "Invalid token, please try again after checkin.",
   "Internal Server Error": "Internal Server Error !!! Call Denny Huang ~~~!",
 
+  "detected_qrcode_value_is": "Detected QRCode value is {value}",
+
   "login_as": "Login As:"
 }

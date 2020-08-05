@@ -12,6 +12,7 @@
         </div>
       </div>
     </template>
+    <h6 role="detected" class="ma-0" v-if="playerToken">{{ $t('detected_qrcode_value_is', { value: playerToken.slice(0, 10) + playerToken.slice(10).replace(/[a-z0-9]/g, '*') }) }}</h6>
     <qrcode-reader
         :noResult="true"
         @success="onScanSuccess"
@@ -107,6 +108,8 @@ export default {
 
 <style lang="stylus">
   [role="title"]
+    text-align: center
+  [role="detected"]
     text-align: center
   [role="stampScanner"]
     margin: 1em auto

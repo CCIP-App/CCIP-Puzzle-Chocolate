@@ -18,5 +18,7 @@
   "Invalid token, please try again after checkin.": "你好像還沒報到，沒報到是不能參與大地遊戲的m9(＾Д＾)",
   "Internal Server Error": "Server 好像壞了欸，快呼叫 Denny Huang　_(:3」∠)_",
 
+  "detected_qrcode_value_is": "偵測到 QRCode 為 {value}",
+
   "login_as": "目前登入身分為"
 }
