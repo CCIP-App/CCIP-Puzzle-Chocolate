@@ -1,7 +1,7 @@
 <template>
   <div role="bingo">
     <h1 role="GameName">{{ $t('bingo') }}</h1>
-    <h2 role="bingos" v-if="playerPubToken">{{ $t('has_bingos', { bingos: bingos.toString() }) }}</h2>
+    <h2 role="bingos" v-if="loggedIn">{{ $t('has_bingos', { bingos: bingos.toString() }) }}</h2>
     <template v-if="showScanner">
       <qrcode-reader
         :enable="showScanner"
@@ -12,7 +12,7 @@
         @error="onScanFail"
       ></qrcode-reader>
     </template>
-    <template v-if="playerPubToken !== null && isConfigurationCorrect">
+    <template v-if="loggedIn && isConfigurationCorrect">
       <SquareGrid :booths="boothList" :userStamps="stamps" :showAnchor="true" />
       <div role="game-description" v-if="description($i18n.locale).length > 0">
         <template v-for="(line, index) in description($i18n.locale).split('\n')">
@@ -43,7 +43,7 @@ import bingoShuffler from '@/utils/shuffledBingo.js'
 export default {
   name: 'Bingo',
   computed: {
-    ...mapGetters(['description', 'booths', 'bingoPattern', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage']),
+    ...mapGetters(['description', 'booths', 'bingoPattern', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage', 'loggedIn']),
     isConfigurationCorrect () {
       const matchedSignificant = this.bingoPattern
         .split('')

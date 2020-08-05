@@ -1,12 +1,14 @@
 import crypto from 'crypto'
 import apiClient from '../utils/apiClient.js'
+import i18n from '../i18n.js'
 
 const defaultState = {
   playerPubToken: null,
   stamps: [],
   fragments: [],
   errorMessage: null,
-  showErrorMessage: false
+  showErrorMessage: false,
+  loggedIn: false
 }
 
 const types = {
@@ -22,7 +24,8 @@ const getters = {
   stamps: (state) => state.stamps,
   playerPubToken: (state) => state.playerPubToken,
   errorMessage: (state) => state.errorMessage,
-  showErrorMessage: (state) => state.showErrorMessage
+  showErrorMessage: (state) => state.showErrorMessage,
+  loggedIn: (state) => state.logged
 }
 
 const actions = {
@@ -45,11 +48,14 @@ const actions = {
       const { puzzles: fragments, deliverers: slugOfStamps } = res
       context.commit('UPDATE_FRAGMENT', fragments || [])
       context.commit('UPDATE_STAMPS', slugOfStamps || [])
+      context.commit('UDPATE_LOGIN_STATE', true)
     } catch (e) {
       const { response: { data: { message } } } = e
-      context.commit('UPDATE_ERROR_MESSAGE', message)
+      context.commit('UPDATE_ERROR_MESSAGE', i18n.t(message))
       context.commit('UPDATE_FRAGMENT', [])
       context.commit('UPDATE_STAMPS', [])
+      context.commit('SET_TOKEN', null)
+      context.commit('UDPATE_LOGIN_STATE', false)
     }
   },
   showErrorMessage: (context) => {
@@ -76,6 +82,9 @@ const mutations = {
   },
   UPDATE_SHOW_ERROR_MESSAGE: (state) => {
     state.showErrorMessage = !state.showErrorMessage
+  },
+  UDPATE_LOGIN_STATE: (state, loggedIn) => {
+    state.loggedIn = loggedIn
   }
 }
 

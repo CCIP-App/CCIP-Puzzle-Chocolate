@@ -11,7 +11,7 @@
         @error="onScanFail"
       ></qrcode-reader>
     </template>
-    <template v-if="playerPubToken !== null">
+    <template v-if="loggedIn">
       <h2 role="got-points">{{ $t('has_got_points', {points: gotPoints}) }}</h2>
       <SquareGrid :booths="boothList" :userStamps="stamps" :showAnchor="true" />
       <div role="game-description" v-if="description($i18n.locale).length > 0">
@@ -35,7 +35,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Reward',
   computed: {
-    ...mapGetters(['description', 'booths', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage']),
+    ...mapGetters(['description', 'booths', 'stamps', 'playerPubToken', 'errorMessage', 'showErrorMessage', 'loggedIn']),
     showScanner () {
       return this.playerPubToken === null
     },
