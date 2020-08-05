@@ -15,6 +15,7 @@
   "qrcode_scan_fail": "QRCode not found, please retry after adjust screen brightness of QRCode and photo shooting angle",
   "Game configuration is not correct": "Game configuration is not correct. Please report this problem to staffs.",
   "invalid token": "Invalid Token",
+  "Invalid token, please try again after checkin.": "Invalid token, please try again after checkin.",
   "Internal Server Error": "Internal Server Error !!! Call Denny Huang ~~~!",
 
   "login_as": "Login As:"
