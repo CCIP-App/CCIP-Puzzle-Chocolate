@@ -15,6 +15,7 @@
   "qrcode_scan_fail": "無法識別 QR Code，請嘗試調整亮度與拍照角度試試",
   "Game configuration is not correct": "遊戲設定檔異常，無法進行遊戲，請回報給工作人員(´・ω・`)",
   "invalid token": "QRCode 無效(*´∀｀*)",
+  "invalid deliverer token": "攤位端網址無效，請聯絡大會人員(TдT)",
   "Invalid token, please try again after checkin.": "你好像還沒報到，沒報到是不能參與大地遊戲的m9(＾Д＾)",
   "Internal Server Error": "Server 好像壞了欸，快呼叫 Denny Huang　_(:3」∠)_",
 
