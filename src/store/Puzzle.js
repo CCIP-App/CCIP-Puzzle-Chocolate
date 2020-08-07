@@ -25,7 +25,7 @@ const getters = {
   playerPubToken: (state) => state.playerPubToken,
   errorMessage: (state) => state.errorMessage,
   showErrorMessage: (state) => state.showErrorMessage,
-  loggedIn: (state) => state.logged
+  loggedIn: (state) => state.loggedIn
 }
 
 const actions = {
