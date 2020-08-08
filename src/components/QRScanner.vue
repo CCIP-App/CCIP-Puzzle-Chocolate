@@ -8,7 +8,7 @@
         <p>連 iOS 都支援 WebRTC 了，您是不是該換裝置了呢？</p>
       </div>
       <template v-else>
-        <div :style="{width:previewWidth}" v-show="enable">
+        <div :style="{width:previewWidth}" v-if="enable">
           <qrcode-stream @decode="scannerCallback"></qrcode-stream>
         </div>
         <div v-show="!enable">
