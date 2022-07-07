@@ -26,6 +26,8 @@ jobs:
     - name: Install npm packages
       run: npm install
     - name: Generate Pages
+      env:
+        NODE_OPTIONS: "--openssl-legacy-provider"
       run: npm run build
     - name: Generate config
       env:
