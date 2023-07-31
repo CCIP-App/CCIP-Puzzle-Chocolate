@@ -14,7 +14,7 @@
     </template>
     <h6 role="detected" class="ma-0" v-if="playerToken">{{ $t('detected_qrcode_value_is', { value: playerToken.slice(0, 10) + playerToken.slice(10).replace(/[a-z0-9]/g, '*') }) }}</h6>
     <qrcode-reader
-        :noResult="true"
+        :noResult="false"
         @success="onScanSuccess"
         @error="onScanFail"
         role="stampScanner"
