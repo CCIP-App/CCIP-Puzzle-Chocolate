@@ -1,3 +1,4 @@
 [submodule "generator"]
 	path = generator
 	url = https://github.com/CCIP-App/CCIP-Puzzle-Config-Generator-Chocolate.git
+	branch = master
