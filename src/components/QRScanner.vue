@@ -3,26 +3,23 @@
   <center>
       <h2 class="ma-0" v-if=" title != '' ">{{ title }}</h2>
       <p role="subTitle" v-if="subTitle !== '' ">{{ subTitle }}</p>
+      <h6 class="ma-0" v-if=" !noResult " role="result">{{ result }}</h6>
       <div v-if="!isWebRTCSupported">
         <p>連 iOS 都支援 WebRTC 了，您是不是該換裝置了呢？</p>
       </div>
       <template v-else>
-        <div v-show="enable">
-          <video ref="preview" :width="previewWidth" autoplay playsinline></video>
+        <div :style="{width:previewWidth}" v-if="enable">
+          <qrcode-stream @decode="scannerCallback"></qrcode-stream>
         </div>
         <div v-show="!enable">
-        <button id="enableButton" class="OpenCamera" @click="startScanner"></button>
-      </div>
+          <button id="enableButton" class="OpenCamera" @click="startScanner"></button>
+        </div>
       </template>
-      <h6 class="ma-0" v-if=" !noResult ">{{ result }}</h6>
     </center>
   </div>
 </template>
 
 <script>
-import QrScanner from 'qr-scanner'
-import _ from 'lodash'
-
 export default {
   name: 'QRScanner',
   props: {
@@ -43,10 +40,9 @@ export default {
   },
   data () {
     return {
-      result: 'Loading...',
-      scanner: null,
       previewWidth: null,
-      enable: false
+      enable: false,
+      result: null
     }
   },
   computed: {
@@ -60,12 +56,6 @@ export default {
       return window.navigator.userAgent.match(/iPhone|iPad|iPod/i)
     }
   },
-  watch: {
-    result (newValue) {
-      if (newValue === null) return
-      this.emitResult(this, newValue)
-    }
-  },
   mounted () {
     if (!this.isIOS) {
       this.startScanner()
@@ -74,24 +64,18 @@ export default {
   methods: {
     scannerCallback (result) {
       this.result = result
+      this.$emit('success', result)
+      let oldValue = result
+      setTimeout(_ => {
+        if (oldValue === this.result) {
+          this.result = ''
+        }
+      }, 5000)
     },
-    emitResult: _.debounce((that, newValue) => {
-      console.warn('emit result, is', newValue)
-      if (that.isIOS) {
-        that.disableScanner()
-      }
-      that.result = null
-      that.$emit('success', newValue)
-    }, 100),
     startScanner () {
       if (this.isWebRTCSupported) {
         this.enable = true
-
-        QrScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js'
-        this.scanner = new QrScanner(this.$refs.preview, this.scannerCallback)
-        this.scanner.setInversionMode('both')
         this.setPreviewSize()
-        this.scanner.start()
       }
     },
     setPreviewSize () {
@@ -111,17 +95,7 @@ export default {
           this.previewWidth = (Math.round(height * 0.4 * aspect)) + 'px'
         }
       }
-    },
-    disableScanner () {
-      if (this.scanner) {
-        this.enable = false
-        this.scanner.destroy()
-        this.scanner = null
-      }
     }
-  },
-  beforeDestroy () {
-    this.disableScanner()
   }
 }
 </script>
@@ -144,4 +118,7 @@ export default {
 
   [role="subTitle"]
     margin-bottom: 3rem
+
+  [role="result"]
+    font-size: 1rem
 </style>
